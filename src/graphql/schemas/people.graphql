@@ -1,0 +1,12 @@
+type Person {
+  name: String!
+  height: String!
+  mass: String!
+  gender: String!
+  homeworld: String!
+}
+
+type Query {
+  people(page: String): [Person]
+  searchPerson(search: String!): Person
+}

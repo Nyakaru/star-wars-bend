@@ -1,0 +1,32 @@
+{
+  "name": "star-wars-bend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Nyakaru/star-wars-bend.git",
+  "author": "nyakaru <nyakaru477@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@graphql-codegen/cli": "1.21.4",
+    "@graphql-codegen/typescript": "1.22.0",
+    "@graphql-codegen/typescript-resolvers": "1.19.1",
+    "@types/express": "^4.17.11",
+    "@types/lodash": "^4.14.168",
+    "graphql-tools": "^7.0.4",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "apollo-datasource-rest": "^0.13.0",
+    "apollo-server-express": "^2.24.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "graphql-import-node": "^0.0.4",
+    "lodash": "^4.17.21"
+  },
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.yml",
+    "dev": "nodemon src/index.ts",
+    "start":"tsc && node src -d dist"
+  }
+}
