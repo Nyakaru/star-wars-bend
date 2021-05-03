@@ -6,7 +6,24 @@ type Person {
   homeworld: String!
 }
 
+type Planet {
+  name: String!
+  rotation_period: String!
+  orbital_period: String!
+  diameter: String!
+  climate: String!
+  gravity: String!
+  terrain: String!
+  surface_water: String!
+  population: String!
+}
+
+type SearchResponse {
+  person: Person
+  homeworld: Planet
+}
+
 type Query {
   people(page: String): [Person]
-  searchPerson(search: String!): Person
+  searchPerson(search: String!): SearchResponse
 }

@@ -22,10 +22,23 @@ export type Person = {
   homeworld: Scalars['String'];
 };
 
+export type Planet = {
+  __typename?: 'Planet';
+  name: Scalars['String'];
+  rotation_period: Scalars['String'];
+  orbital_period: Scalars['String'];
+  diameter: Scalars['String'];
+  climate: Scalars['String'];
+  gravity: Scalars['String'];
+  terrain: Scalars['String'];
+  surface_water: Scalars['String'];
+  population: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   people?: Maybe<Array<Maybe<Person>>>;
-  searchPerson?: Maybe<Person>;
+  searchPerson?: Maybe<SearchResponse>;
 };
 
 
@@ -36,6 +49,12 @@ export type QueryPeopleArgs = {
 
 export type QuerySearchPersonArgs = {
   search: Scalars['String'];
+};
+
+export type SearchResponse = {
+  __typename?: 'SearchResponse';
+  person?: Maybe<Person>;
+  homeworld?: Maybe<Planet>;
 };
 
 
@@ -118,7 +137,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Person: ResolverTypeWrapper<Person>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Planet: ResolverTypeWrapper<Planet>;
   Query: ResolverTypeWrapper<{}>;
+  SearchResponse: ResolverTypeWrapper<SearchResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -126,7 +147,9 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Person: Person;
   String: Scalars['String'];
+  Planet: Planet;
   Query: {};
+  SearchResponse: SearchResponse;
   Boolean: Scalars['Boolean'];
 };
 
@@ -139,14 +162,35 @@ export type PersonResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PlanetResolvers<ContextType = any, ParentType extends ResolversParentTypes['Planet'] = ResolversParentTypes['Planet']> = {
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  rotation_period?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  orbital_period?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  diameter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  climate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  gravity?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  terrain?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  surface_water?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  population?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   people?: Resolver<Maybe<Array<Maybe<ResolversTypes['Person']>>>, ParentType, ContextType, RequireFields<QueryPeopleArgs, never>>;
-  searchPerson?: Resolver<Maybe<ResolversTypes['Person']>, ParentType, ContextType, RequireFields<QuerySearchPersonArgs, 'search'>>;
+  searchPerson?: Resolver<Maybe<ResolversTypes['SearchResponse']>, ParentType, ContextType, RequireFields<QuerySearchPersonArgs, 'search'>>;
+};
+
+export type SearchResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchResponse'] = ResolversParentTypes['SearchResponse']> = {
+  person?: Resolver<Maybe<ResolversTypes['Person']>, ParentType, ContextType>;
+  homeworld?: Resolver<Maybe<ResolversTypes['Planet']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Person?: PersonResolvers<ContextType>;
+  Planet?: PlanetResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  SearchResponse?: SearchResponseResolvers<ContextType>;
 };
 
 
